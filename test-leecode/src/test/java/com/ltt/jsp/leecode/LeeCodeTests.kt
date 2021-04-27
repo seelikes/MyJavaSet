@@ -114,4 +114,57 @@ class LeeCodeTests {
         }
         return min.toInt()
     }
+
+    // https://leetcode-cn.com/problems/next-greater-element-iii/
+    @Test
+    fun test_nextGreaterElement() {
+        var n = 12
+        Assert.assertEquals(21, nextGreaterElement(n))
+
+        n = 21
+        Assert.assertEquals(-1, nextGreaterElement(n))
+
+        n = 789342
+        Assert.assertEquals(789432, nextGreaterElement(n))
+
+        n = 34372
+        Assert.assertEquals(34732, nextGreaterElement(n))
+
+        n = 230241
+        Assert.assertEquals(230412, nextGreaterElement(n))
+    }
+
+    private fun nextGreaterElement(n: Int): Int {
+        var _n = n
+        val ret = mutableListOf<Int>()
+        while (_n > 0) {
+            val m = _n % 10
+            for (p in ret.indices) {
+                if (m < ret[p]) {
+                    val tmp = ret[p]
+                    ret[p] = m
+                    ret.add(tmp)
+                    var a: Long = _n / 10L
+                    for (x in ret.size downTo 1) {
+                        a = a * 10 + ret[x - 1]
+                    }
+                    if (a < Int.MAX_VALUE) {
+                        return a.toInt()
+                    }
+                }
+            }
+            val addNew = _n % 10
+            ret.add(addNew)
+            for (y in (ret.size - 1) downTo 1) {
+                if (ret[y - 1] < addNew) {
+                    ret[y] = ret[y - 1]
+                    continue
+                }
+                ret[y] = addNew
+                break
+            }
+            _n /= 10
+        }
+        return -1
+    }
 }
