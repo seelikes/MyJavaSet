@@ -125,13 +125,19 @@ class LeeCodeTests {
         Assert.assertEquals(-1, nextGreaterElement(n))
 
         n = 789342
-        Assert.assertEquals(789432, nextGreaterElement(n))
+        Assert.assertEquals(789423, nextGreaterElement(n))
 
         n = 34372
-        Assert.assertEquals(34732, nextGreaterElement(n))
+        Assert.assertEquals(34723, nextGreaterElement(n))
 
         n = 230241
         Assert.assertEquals(230412, nextGreaterElement(n))
+
+        n = 2147483486
+        Assert.assertEquals(-1, nextGreaterElement(n))
+
+        n = 2147483476
+        Assert.assertEquals(2147483647, nextGreaterElement(n))
     }
 
     private fun nextGreaterElement(n: Int): Int {
@@ -143,26 +149,28 @@ class LeeCodeTests {
                 if (m < ret[p]) {
                     val tmp = ret[p]
                     ret[p] = m
+                    for (j in 1 until ret.size) {
+                        val k = ret[j]
+                        var i = j - 1
+                        while (i >= 0 && ret[i] < k) {
+                            ret[i + 1] = ret[i]
+                            i--
+                        }
+                        ret[i + 1] = k
+                    }
                     ret.add(tmp)
                     var a: Long = _n / 10L
                     for (x in ret.size downTo 1) {
                         a = a * 10 + ret[x - 1]
                     }
-                    if (a < Int.MAX_VALUE) {
-                        return a.toInt()
+                    return if (a <= Int.MAX_VALUE) {
+                        a.toInt()
+                    } else {
+                        -1
                     }
                 }
             }
-            val addNew = _n % 10
-            ret.add(addNew)
-            for (y in (ret.size - 1) downTo 1) {
-                if (ret[y - 1] < addNew) {
-                    ret[y] = ret[y - 1]
-                    continue
-                }
-                ret[y] = addNew
-                break
-            }
+            ret.add(m)
             _n /= 10
         }
         return -1
