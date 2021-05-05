@@ -2,7 +2,8 @@ package com.ltt.jsp.leecode
 
 import org.junit.Assert
 import org.junit.Test
-import kotlin.math.abs
+import java.util.*
+import kotlin.time.ExperimentalTime
 
 /**
  * Created by liutiantian on 2021-03-15 22:43 星期一
@@ -174,5 +175,89 @@ class LeeCodeTests {
             _n /= 10
         }
         return -1
+    }
+
+    // https://leetcode-cn.com/problems/symmetric-tree/
+    @Test
+    fun test_isSymmetric() {
+
+    }
+
+    class TreeNode(var value: Int) {
+        var left: TreeNode? = null
+        var right: TreeNode? = null
+    }
+
+    fun isSymmetric(root: TreeNode?): Boolean {
+        val queueWrite = LinkedList<TreeNode?>()
+        val queueRead = LinkedList<TreeNode?>()
+        queueRead.offer(root)
+        while (!queueRead.isEmpty()) {
+            if (queueRead.size == 1) {
+                val node = queueRead.pollFirst()
+                queueWrite.offer(node?.left)
+                queueWrite.offer(node?.right)
+            } else {
+                val first = queueRead.pollFirst()
+                val last = queueRead.pollLast()
+                if (first?.value != last?.value) {
+                    return false
+                }
+                queueWrite.offer(first?.left)
+                queueWrite.offer(first?.right)
+                queueWrite
+            }
+//            queueWrite.offer()
+        }
+        return false
+    }
+
+    // https://leetcode-cn.com/problems/sum-of-square-numbers/
+    @Test
+    fun test_judgeSquareSum() {
+        var c = 5
+        Assert.assertTrue(judgeSquareSum(c))
+        c = 3
+        Assert.assertFalse(judgeSquareSum(c))
+        c = 4
+        Assert.assertTrue(judgeSquareSum(c))
+        c = 2
+        Assert.assertTrue(judgeSquareSum(c))
+        c = 1
+        Assert.assertTrue(judgeSquareSum(c))
+        c = Int.MAX_VALUE
+        Assert.assertFalse(judgeSquareSum(c))
+    }
+
+    private fun judgeSquareSum(c: Int): Boolean {
+        var a = 0
+        var a2 = 0
+        val list = mutableListOf<Int>()
+        while (a2 in 0..c) {
+            list.add(a2)
+            val ret = c - a2
+            var i = 0
+            var j = list.size - 1
+            while (i + 1 < j) {
+                if (list[i] == ret) {
+                    return true
+                }
+                val mid = (i + j) / 2
+                if (ret < list[mid]) {
+                    j = mid
+                } else {
+                    i = mid
+                }
+            }
+            if (list[i] == ret) {
+                return true
+            }
+            if (list[j] == ret) {
+                return true
+            }
+            a++
+            a2 = a * a
+        }
+        return false
     }
 }
