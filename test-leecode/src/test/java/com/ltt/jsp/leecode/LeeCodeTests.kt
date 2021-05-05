@@ -260,4 +260,18 @@ class LeeCodeTests {
         }
         return false
     }
+
+    // https://leetcode-cn.com/problems/delete-and-earn/
+    @Test
+    fun test_deleteAndEarn() {
+        var nums = intArrayOf(3, 4, 2)
+        Assert.assertEquals(6, deleteAndEarn(nums))
+
+        nums = intArrayOf(2, 2, 3, 3, 3, 4)
+        Assert.assertEquals(9, deleteAndEarn(nums))
+    }
+
+    private fun deleteAndEarn(nums: IntArray): Int {
+        return 0
+    }
 }
