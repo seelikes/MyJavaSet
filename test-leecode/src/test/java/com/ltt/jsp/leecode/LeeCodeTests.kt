@@ -310,4 +310,34 @@ class LeeCodeTests {
     private fun minPathSum(grid: Array<IntArray>): Int {
         return 0
     }
+
+    // https://leetcode-cn.com/problems/combination-sum-ii/
+    @Test
+    fun test_combinationSum2() {
+        var candidates = intArrayOf(10, 1, 2, 7, 6, 1, 5)
+        var target = 8
+        Assert.assertEquals(
+            listOf(
+                listOf(1, 7),
+                listOf(1, 2, 5),
+                listOf(2, 6),
+                listOf(1, 1, 6)
+            ),
+            combinationSum2(candidates, target)
+        )
+
+        candidates = intArrayOf(2, 5, 2, 1, 2)
+        target = 5
+        Assert.assertEquals(
+            listOf(
+                listOf(1, 2, 2),
+                listOf(5)
+            ),
+            combinationSum2(candidates, target)
+        )
+    }
+
+    private fun combinationSum2(candidates: IntArray, target: Int): List<List<Int>> {
+        return listOf()
+    }
 }
