@@ -382,4 +382,28 @@ class LeeCodeTests {
     private fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
         return null
     }
+
+    // https://leetcode-cn.com/problems/search-a-2d-matrix/
+    @Test
+    fun test_searchMatrix() {
+        var matrix = arrayOf(
+            intArrayOf(1, 3, 5, 7),
+            intArrayOf(10, 11, 16, 20),
+            intArrayOf(23, 30, 34, 60)
+        )
+        var target = 3
+        Assert.assertTrue(searchMatrix(matrix, target))
+
+        matrix = arrayOf(
+            intArrayOf(1, 3, 5, 7),
+            intArrayOf(10, 11, 16, 20),
+            intArrayOf(23, 30, 34, 60)
+        )
+        target = 13
+        Assert.assertFalse(searchMatrix(matrix, target))
+    }
+
+    private fun searchMatrix(matrix: Array<IntArray>, target: Int): Boolean {
+        return false
+    }
 }
