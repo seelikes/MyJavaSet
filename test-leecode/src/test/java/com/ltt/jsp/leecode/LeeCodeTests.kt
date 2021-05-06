@@ -340,4 +340,46 @@ class LeeCodeTests {
     private fun combinationSum2(candidates: IntArray, target: Int): List<List<Int>> {
         return listOf()
     }
+
+    // https://leetcode-cn.com/problems/add-two-numbers/
+    @Test
+    fun test_addTwoNumbers() {
+        var l1 = createListNode(intArrayOf(2, 4, 3))
+        var l2 = createListNode(intArrayOf(5, 6, 4))
+        Assert.assertEquals(createListNode(intArrayOf(7, 0, 8)), addTwoNumbers(l1, l2))
+
+        l1 = createListNode(intArrayOf(0))
+        l2 = createListNode(intArrayOf(0))
+        Assert.assertEquals(createListNode(intArrayOf(0)), addTwoNumbers(l1, l2))
+
+        l1 = createListNode(intArrayOf(9, 9, 9, 9, 9, 9, 9))
+        l2 = createListNode(intArrayOf(9, 9, 9, 9))
+        Assert.assertEquals(createListNode(intArrayOf(8, 9, 9, 9, 0, 0, 0, 1)), addTwoNumbers(l1, l2))
+    }
+
+    private class ListNode(var value: Int) {
+        var next: ListNode? = null
+
+        override fun hashCode(): Int {
+            return Objects.hash(value)
+        }
+
+        override fun equals(other: Any?): Boolean {
+            return super.equals(other) || (value == (other as? ListNode)?.value && next == (other as? ListNode)?.next)
+        }
+    }
+
+    private fun createListNode(array: IntArray): ListNode {
+        var ret: ListNode? = null
+        array.reversedArray().forEach {
+            val node = ListNode(it)
+            node.next = ret
+            ret = node
+        }
+        return ret as ListNode
+    }
+
+    private fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
+        return null
+    }
 }
