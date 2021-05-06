@@ -450,4 +450,17 @@ class LeeCodeTests {
         }
         return false
     }
+
+    // https://leetcode-cn.com/problems/xor-operation-in-an-array/
+    @Test
+    fun test_xorOperation() {
+        Assert.assertEquals(8, xorOperation(5, 0))
+        Assert.assertEquals(8, xorOperation(4, 3))
+        Assert.assertEquals(7, xorOperation(1, 7))
+        Assert.assertEquals(2, xorOperation(10, 5))
+    }
+
+    private fun xorOperation(n: Int, start: Int): Int {
+        return 0
+    }
 }
