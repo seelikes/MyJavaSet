@@ -180,7 +180,13 @@ class LeeCodeTests {
     // https://leetcode-cn.com/problems/symmetric-tree/
     @Test
     fun test_isSymmetric() {
+        var list = listOf<Int?>(1, 2, 2, 3, 4, 4, 3)
+        var node = createNode(list, 0)
+        Assert.assertTrue(isSymmetric(node))
 
+        list = listOf(1, 2, 2, null, 3, null, 3)
+        node = createNode(list, 0)
+        Assert.assertFalse(isSymmetric(node))
     }
 
     class TreeNode(var value: Int) {
@@ -188,28 +194,37 @@ class LeeCodeTests {
         var right: TreeNode? = null
     }
 
-    fun isSymmetric(root: TreeNode?): Boolean {
-        val queueWrite = LinkedList<TreeNode?>()
-        val queueRead = LinkedList<TreeNode?>()
-        queueRead.offer(root)
-        while (!queueRead.isEmpty()) {
-            if (queueRead.size == 1) {
-                val node = queueRead.pollFirst()
-                queueWrite.offer(node?.left)
-                queueWrite.offer(node?.right)
+    private fun createNode(list: List<Int?>, index: Int): TreeNode? {
+        val value = list.getOrNull(index) ?: return null
+        val node = TreeNode(value)
+        node.left = createNode(list, index * 2 + 1)
+        node.right = createNode(list, index * 2 + 2)
+        return node
+    }
+
+    private fun isSymmetric(root: TreeNode?): Boolean {
+        val queue = LinkedList<TreeNode?>()
+        queue.offer(root)
+        while (!queue.isEmpty()) {
+            if (queue.size == 1) {
+                val node = queue.pollFirst()
+                queue.addFirst(node?.left)
+                queue.addLast(node?.right)
             } else {
-                val first = queueRead.pollFirst()
-                val last = queueRead.pollLast()
+                val first = queue.pollFirst()
+                val last = queue.pollLast()
                 if (first?.value != last?.value) {
                     return false
                 }
-                queueWrite.offer(first?.left)
-                queueWrite.offer(first?.right)
-                queueWrite
+                if (first != null) {
+                    queue.addFirst(first.right)
+                    queue.addFirst(first.left)
+                    queue.addLast(last?.left)
+                    queue.addLast(last?.right)
+                }
             }
-//            queueWrite.offer()
         }
-        return false
+        return true
     }
 
     // https://leetcode-cn.com/problems/sum-of-square-numbers/
