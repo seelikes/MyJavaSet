@@ -9,11 +9,35 @@ import kotlin.time.ExperimentalTime
  * Created by liutiantian on 2021-03-15 22:43 星期一
  */
 class LeeCodeTests {
+    // https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
     @Test
-    fun medianOfTwoSortedArrays() {
+    fun test_findMedianSortedArrays() {
+        var nums1 = intArrayOf(1, 3)
+        var nums2 = intArrayOf(2)
+        Assert.assertEquals(2.0, findMedianSortedArrays(nums1, nums2))
 
+        nums1 = intArrayOf(1, 2)
+        nums2 = intArrayOf(3, 4)
+        Assert.assertEquals(2.5, findMedianSortedArrays(nums1, nums2))
+
+        nums1 = intArrayOf(0, 0)
+        nums2 = intArrayOf(0, 0)
+        Assert.assertEquals(0.0, findMedianSortedArrays(nums1, nums2))
+
+        nums1 = intArrayOf()
+        nums2 = intArrayOf(1)
+        Assert.assertEquals(1.0, findMedianSortedArrays(nums1, nums2))
+
+        nums1 = intArrayOf(2)
+        nums2 = intArrayOf()
+        Assert.assertEquals(2.0, findMedianSortedArrays(nums1, nums2))
     }
 
+    private fun findMedianSortedArrays(nums1: IntArray, nums2: IntArray): Double {
+        return 0.0
+    }
+
+    // https://leetcode-cn.com/problems/find-majority-element-lcci/
     @Test
     fun majorityElement() {
         var nums = arrayOf(
@@ -51,6 +75,7 @@ class LeeCodeTests {
         return -1
     }
 
+    // https://leetcode-cn.com/problems/smallest-range-i/
     @Test
     fun test_smallestRangeI() {
         var A = intArrayOf(1)
@@ -66,11 +91,11 @@ class LeeCodeTests {
         Assert.assertEquals(0, smallestRangeI(A, K))
     }
 
-    // https://leetcode-cn.com/problems/smallest-range-i/
     private fun smallestRangeI(A: IntArray, K: Int): Int {
         return 0
     }
 
+    // https://leetcode-cn.com/problems/smallest-range-ii/
     @Test
     fun test_smallestRangeII() {
         var A = intArrayOf(1)
@@ -86,11 +111,11 @@ class LeeCodeTests {
         Assert.assertEquals(3, smallestRangeII(A, K))
     }
 
-    // https://leetcode-cn.com/problems/smallest-range-ii/
     private fun smallestRangeII(A: IntArray, K: Int): Int {
         return 0
     }
 
+    // https://leetcode-cn.com/problems/smallest-difference-lcci/
     @Test
     fun test_smallestDifference() {
         var a = intArrayOf(1, 3, 15, 11, 2)
@@ -102,7 +127,6 @@ class LeeCodeTests {
         Assert.assertEquals(1, smallestDifference(a, b))
     }
 
-    // https://leetcode-cn.com/problems/smallest-difference-lcci/
     private fun smallestDifference(a: IntArray, b: IntArray): Int {
         var min = Int.MAX_VALUE.toLong()
         for (m in a.indices) {
