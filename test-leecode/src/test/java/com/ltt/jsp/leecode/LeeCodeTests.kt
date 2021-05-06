@@ -428,6 +428,26 @@ class LeeCodeTests {
     }
 
     private fun searchMatrix(matrix: Array<IntArray>, target: Int): Boolean {
+        val rowCount = matrix.size
+        val columnCount = matrix[0].size
+        var i = 0
+        var j = rowCount * columnCount - 1
+        while (i + 1 < j) {
+            if (matrix[i / columnCount][i % columnCount] == target) {
+                return true
+            }
+            val mid = (i + j) / 2
+            if (target < matrix[mid / columnCount][mid % columnCount]) {
+                j = mid
+            } else {
+                i = mid
+            }
+        }
+        if (target == matrix[i / columnCount][i % columnCount]) {
+            return true
+        } else if (target == matrix[j / columnCount][j % columnCount]) {
+            return true
+        }
         return false
     }
 }
