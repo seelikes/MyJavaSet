@@ -289,4 +289,25 @@ class LeeCodeTests {
     private fun deleteAndEarn(nums: IntArray): Int {
         return 0
     }
+
+    // https://leetcode-cn.com/problems/minimum-path-sum/
+    @Test
+    fun test_minPathSum() {
+        var grid = arrayOf(
+            intArrayOf(1, 3, 1),
+            intArrayOf(1, 5, 1),
+            intArrayOf(4, 2, 1)
+        )
+        Assert.assertEquals(7, minPathSum(grid))
+
+        grid = arrayOf(
+            intArrayOf(1, 2, 3),
+            intArrayOf(4, 5, 6)
+        )
+        Assert.assertEquals(12, minPathSum(grid))
+    }
+
+    private fun minPathSum(grid: Array<IntArray>): Int {
+        return 0
+    }
 }
