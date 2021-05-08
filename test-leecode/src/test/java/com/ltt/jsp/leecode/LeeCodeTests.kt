@@ -463,4 +463,34 @@ class LeeCodeTests {
     private fun xorOperation(n: Int, start: Int): Int {
         return 0
     }
+
+    // https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/
+    @Test
+    fun test_removeNthFromEnd() {
+        Assert.assertEquals(
+            createListNode(intArrayOf(1, 2, 3, 5)),
+            removeNthFromEnd(
+                createListNode(intArrayOf(1, 2, 3, 4, 5)),
+                2
+            )
+        )
+        Assert.assertEquals(
+            createListNode(intArrayOf()),
+            removeNthFromEnd(
+                createListNode(intArrayOf(1)),
+                1
+            )
+        )
+        Assert.assertEquals(
+            createListNode(intArrayOf(1, 2)),
+            removeNthFromEnd(
+                createListNode(intArrayOf(1)),
+                1
+            )
+        )
+    }
+
+    private fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {
+        return null
+    }
 }
