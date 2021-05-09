@@ -493,4 +493,57 @@ class LeeCodeTests {
     private fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {
         return null
     }
+
+    // https://leetcode-cn.com/problems/minimum-number-of-days-to-make-m-bouquets/
+    @Test
+    fun test_minDays() {
+        Assert.assertEquals(
+            3,
+            minDays(
+                intArrayOf(1, 10, 3, 10, 2),
+                3,
+                1
+            )
+        )
+
+        Assert.assertEquals(
+            -1,
+            minDays(
+                intArrayOf(1, 10, 3, 10, 2),
+                3,
+                2
+            )
+        )
+
+        Assert.assertEquals(
+            3,
+            minDays(
+                intArrayOf(7, 7, 7, 7, 12, 7, 7),
+                2,
+                3
+            )
+        )
+
+        Assert.assertEquals(
+            1000000000,
+            minDays(
+                intArrayOf(1000000000, 1000000000),
+                1,
+                1
+            )
+        )
+
+        Assert.assertEquals(
+            9,
+            minDays(
+                intArrayOf(1, 10, 2, 9, 3, 8, 4, 7, 5, 6),
+                4,
+                2
+            )
+        )
+    }
+
+    private fun minDays(bloomDay: IntArray, m: Int, k: Int): Int {
+        return 0
+    }
 }
