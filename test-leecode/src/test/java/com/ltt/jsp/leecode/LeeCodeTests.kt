@@ -393,14 +393,14 @@ class LeeCodeTests {
         }
     }
 
-    private fun createListNode(array: IntArray): ListNode {
+    private fun createListNode(array: IntArray): ListNode? {
         var ret: ListNode? = null
         array.reversedArray().forEach {
             val node = ListNode(it)
             node.next = ret
             ret = node
         }
-        return ret as ListNode
+        return ret as? ListNode
     }
 
     private fun addTwoNumbers(l1: ListNode?, l2: ListNode?): ListNode? {
@@ -482,16 +482,40 @@ class LeeCodeTests {
             )
         )
         Assert.assertEquals(
-            createListNode(intArrayOf(1, 2)),
+            createListNode(intArrayOf(1)),
             removeNthFromEnd(
-                createListNode(intArrayOf(1)),
+                createListNode(intArrayOf(1, 2)),
                 1
+            )
+        )
+        Assert.assertEquals(
+            createListNode(intArrayOf(2)),
+            removeNthFromEnd(
+                createListNode(intArrayOf(1, 2)),
+                2
             )
         )
     }
 
     private fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {
-        return null
+        var parent: ListNode? = null
+        var node = head
+        var position = 1
+        while (true) {
+            if (position > n) {
+                parent = if (parent == null) head else parent.next
+            }
+            node = node?.next
+            if (node == null) {
+                break
+            }
+            position++
+        }
+        if (parent == null) {
+            return head?.next
+        }
+        parent.next = parent.next?.next
+        return head
     }
 
     // https://leetcode-cn.com/problems/minimum-number-of-days-to-make-m-bouquets/
