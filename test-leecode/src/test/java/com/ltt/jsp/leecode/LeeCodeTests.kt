@@ -686,4 +686,23 @@ class LeeCodeTests {
     private fun zigzagLevelOrder(root: TreeNode?): List<List<Int>> {
         return listOf()
     }
+
+    // https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/
+    // 中等
+    // status: record
+    @Test
+    fun test_levelOrderBottom() {
+        Assert.assertEquals(
+            listOf(
+                listOf(15, 7),
+                listOf(9, 20),
+                listOf(3),
+            ),
+            levelOrderBottom(createNode(listOf(3, 9, 20, null, null, 15, 7), 0))
+        )
+    }
+
+    private fun levelOrderBottom(root: TreeNode?): List<List<Int>> {
+        return listOf()
+    }
 }
