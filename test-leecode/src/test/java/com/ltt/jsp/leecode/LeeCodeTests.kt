@@ -572,6 +572,7 @@ class LeeCodeTests {
     }
 
     // https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
+    // status: unit test
     @Test
     fun test_removeDuplicates() {
         var nums = intArrayOf(1, 1, 2)
