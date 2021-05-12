@@ -572,25 +572,47 @@ class LeeCodeTests {
     }
 
     // https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
+    // status: unit test
     @Test
     fun test_removeDuplicates() {
         var nums = intArrayOf(1, 1, 2)
         Assert.assertEquals(
             2,
-            removeDuplicates(intArrayOf(1, 1, 2))
+            removeDuplicates(nums)
         )
-        Assert.assertEquals(intArrayOf(1, 2), nums.copyOfRange(0, 2))
+        Assert.assertArrayEquals(intArrayOf(1, 2), nums.copyOfRange(0, 2))
 
-        nums = intArrayOf(0,0,1,1,1,2,2,3,3,4)
+        nums = intArrayOf(0, 0, 1, 1, 1, 2, 2, 3, 3, 4)
         Assert.assertEquals(
             5,
-            removeDuplicates(intArrayOf(0,0,1,1,1,2,2,3,3,4))
+            removeDuplicates(nums)
         )
-        Assert.assertEquals(intArrayOf(0, 1, 2, 3, 4), nums.copyOfRange(0, 5))
+        Assert.assertArrayEquals(intArrayOf(0, 1, 2, 3, 4), nums.copyOfRange(0, 5))
     }
 
     private fun removeDuplicates(nums: IntArray): Int {
-        return 0
+        var len = nums.size
+        var n = 1
+        while (true) {
+            when {
+                nums[n] == nums[n - 1] -> {
+                    len--
+                    for (m in n until nums.size) {
+                        nums[m - 1] = nums[m]
+                    }
+                    nums[nums.size - 1] = nums[n - 1]
+                    continue
+                }
+                nums[n] < nums[n - 1] -> {
+                    break
+                }
+            }
+            n++
+            if (n >= nums.size) {
+                break
+            }
+        }
+        return len
     }
 
     // https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
