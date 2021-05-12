@@ -572,7 +572,8 @@ class LeeCodeTests {
     }
 
     // https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
-    // status: unit test
+    // 简单
+    // status: pass
     @Test
     fun test_removeDuplicates() {
         var nums = intArrayOf(1, 1, 2)
@@ -588,29 +589,39 @@ class LeeCodeTests {
             removeDuplicates(nums)
         )
         Assert.assertArrayEquals(intArrayOf(0, 1, 2, 3, 4), nums.copyOfRange(0, 5))
+        nums = intArrayOf()
+        Assert.assertEquals(
+            0,
+            removeDuplicates(nums)
+        )
+        Assert.assertArrayEquals(intArrayOf(), nums.copyOfRange(0, 0))
+        nums = intArrayOf(1, 1)
+        Assert.assertEquals(
+            1,
+            removeDuplicates(nums)
+        )
+        Assert.assertArrayEquals(intArrayOf(1), nums.copyOfRange(0, 1))
     }
 
     private fun removeDuplicates(nums: IntArray): Int {
         var len = nums.size
         var n = 1
         while (true) {
-            when {
-                nums[n] == nums[n - 1] -> {
-                    len--
-                    for (m in n until nums.size) {
-                        nums[m - 1] = nums[m]
-                    }
-                    nums[nums.size - 1] = nums[n - 1]
-                    continue
-                }
-                nums[n] < nums[n - 1] -> {
-                    break
-                }
-            }
-            n++
-            if (n >= nums.size) {
+            if (n >= len) {
                 break
             }
+            if (nums[n] == nums[n - 1]) {
+                len--
+                for (m in n until nums.size) {
+                    nums[m - 1] = nums[m]
+                }
+                nums[nums.size - 1] = nums[n - 1]
+                continue
+            }
+            if (nums[n] < nums[n - 1]) {
+                break
+            }
+            n++
         }
         return len
     }
