@@ -705,4 +705,23 @@ class LeeCodeTests {
     private fun levelOrderBottom(root: TreeNode?): List<List<Int>> {
         return listOf()
     }
+
+    // https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
+    // 简单
+    // status: record
+    @Test
+    fun test_minDepth() {
+        Assert.assertEquals(
+            2,
+            minDepth(createNode(listOf(3, 9, 20, null, null, 15, 7), 0))
+        )
+        Assert.assertEquals(
+            5,
+            minDepth(createNode(listOf(2, null, 3, null, 4, null, 5, null, 6), 0))
+        )
+    }
+
+    private fun minDepth(root: TreeNode?): Int {
+        return 0
+    }
 }
