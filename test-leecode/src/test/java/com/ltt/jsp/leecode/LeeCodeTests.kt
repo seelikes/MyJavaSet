@@ -611,15 +611,12 @@ class LeeCodeTests {
                 break
             }
             if (nums[n] == nums[n - 1]) {
-                len--
-                for (m in n until nums.size) {
+                for (m in n until len) {
                     nums[m - 1] = nums[m]
                 }
+                len--
                 nums[nums.size - 1] = nums[n - 1]
                 continue
-            }
-            if (nums[n] < nums[n - 1]) {
-                break
             }
             n++
         }
