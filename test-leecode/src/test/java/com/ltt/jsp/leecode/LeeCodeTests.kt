@@ -679,7 +679,7 @@ class LeeCodeTests {
                 listOf(20, 9),
                 listOf(15, 7)
             ),
-            levelOrder(createNode(listOf(3, 9, 20, null, null, 15, 7), 0))
+            zigzagLevelOrder(createNode(listOf(3, 9, 20, null, null, 15, 7), 0))
         )
     }
 
