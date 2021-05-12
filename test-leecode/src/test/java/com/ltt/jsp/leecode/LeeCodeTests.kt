@@ -617,7 +617,7 @@ class LeeCodeTests {
 
     // https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
     // 中等
-    // status: unit test
+    // status: pass
     @Test
     fun test_levelOrder() {
         Assert.assertEquals(
