@@ -617,12 +617,13 @@ class LeeCodeTests {
 
     // https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
     // 中等
+    // status: unit test
     @Test
     fun test_levelOrder() {
         Assert.assertEquals(
             listOf(
                 listOf(3),
-                listOf(9, 10),
+                listOf(9, 20),
                 listOf(15, 7)
             ),
             levelOrder(createNode(listOf(3, 9, 20, null, null, 15, 7), 0))
@@ -630,7 +631,32 @@ class LeeCodeTests {
     }
 
     private fun levelOrder(root: TreeNode?): List<List<Int>> {
-        
-        return listOf()
+        val ret = mutableListOf<List<Int>>()
+        val queue = LinkedList<TreeNode>()
+        queue.addLast(root ?: return listOf())
+        while (true) {
+            ret.add(queue.map { it.value })
+            val size = queue.size
+            var n = 0
+            while (true) {
+                val node = queue.poll()
+                if (node != null) {
+                    node.left?.let {
+                        queue.addLast(it)
+                    }
+                    node.right?.let {
+                        queue.addLast(it)
+                    }
+                }
+                n++
+                if (n >= size) {
+                    break
+                }
+            }
+            if (queue.isEmpty()) {
+                break
+            }
+        }
+        return ret
     }
 }
