@@ -614,8 +614,8 @@ class LeeCodeTests {
                 for (m in n until len) {
                     nums[m - 1] = nums[m]
                 }
+                nums[len - 1] = nums[n - 1]
                 len--
-                nums[nums.size - 1] = nums[n - 1]
                 continue
             }
             n++
