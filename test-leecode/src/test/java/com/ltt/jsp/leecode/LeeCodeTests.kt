@@ -570,4 +570,26 @@ class LeeCodeTests {
     private fun minDays(bloomDay: IntArray, m: Int, k: Int): Int {
         return 0
     }
+
+    // https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
+    @Test
+    fun test_removeDuplicates() {
+        var nums = intArrayOf(1, 1, 2)
+        Assert.assertEquals(
+            2,
+            removeDuplicates(intArrayOf(1, 1, 2))
+        )
+        Assert.assertEquals(intArrayOf(1, 2), nums.copyOfRange(0, 2))
+
+        nums = intArrayOf(0,0,1,1,1,2,2,3,3,4)
+        Assert.assertEquals(
+            5,
+            removeDuplicates(intArrayOf(0,0,1,1,1,2,2,3,3,4))
+        )
+        Assert.assertEquals(intArrayOf(0, 1, 2, 3, 4), nums.copyOfRange(0, 5))
+    }
+
+    private fun removeDuplicates(nums: IntArray): Int {
+        return 0
+    }
 }
