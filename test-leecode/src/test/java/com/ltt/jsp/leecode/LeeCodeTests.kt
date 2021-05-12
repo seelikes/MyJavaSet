@@ -3,7 +3,6 @@ package com.ltt.jsp.leecode
 import org.junit.Assert
 import org.junit.Test
 import java.util.*
-import kotlin.time.ExperimentalTime
 
 /**
  * Created by liutiantian on 2021-03-15 22:43 星期一
@@ -205,11 +204,11 @@ class LeeCodeTests {
     @Test
     fun test_isSymmetric() {
         var list = listOf<Int?>(1, 2, 2, 3, 4, 4, 3)
-        var node = createNode(list, 0)
+        var node = createTreeNode(list, 0)
         Assert.assertTrue(isSymmetric(node))
 
         list = listOf(1, 2, 2, null, 3, null, 3)
-        node = createNode(list, 0)
+        node = createTreeNode(list, 0)
         Assert.assertFalse(isSymmetric(node))
     }
 
@@ -218,11 +217,11 @@ class LeeCodeTests {
         var right: TreeNode? = null
     }
 
-    private fun createNode(list: List<Int?>, index: Int): TreeNode? {
+    private fun createTreeNode(list: List<Int?>, index: Int): TreeNode? {
         val value = list.getOrNull(index) ?: return null
         val node = TreeNode(value)
-        node.left = createNode(list, index * 2 + 1)
-        node.right = createNode(list, index * 2 + 2)
+        node.left = createTreeNode(list, index * 2 + 1)
+        node.right = createTreeNode(list, index * 2 + 2)
         return node
     }
 
@@ -634,7 +633,7 @@ class LeeCodeTests {
                 listOf(9, 20),
                 listOf(15, 7)
             ),
-            levelOrder(createNode(listOf(3, 9, 20, null, null, 15, 7), 0))
+            levelOrder(createTreeNode(listOf(3, 9, 20, null, null, 15, 7), 0))
         )
     }
 
@@ -679,7 +678,7 @@ class LeeCodeTests {
                 listOf(20, 9),
                 listOf(15, 7)
             ),
-            zigzagLevelOrder(createNode(listOf(3, 9, 20, null, null, 15, 7), 0))
+            zigzagLevelOrder(createTreeNode(listOf(3, 9, 20, null, null, 15, 7), 0))
         )
     }
 
@@ -698,7 +697,7 @@ class LeeCodeTests {
                 listOf(9, 20),
                 listOf(3),
             ),
-            levelOrderBottom(createNode(listOf(3, 9, 20, null, null, 15, 7), 0))
+            levelOrderBottom(createTreeNode(listOf(3, 9, 20, null, null, 15, 7), 0))
         )
     }
 
@@ -713,15 +712,59 @@ class LeeCodeTests {
     fun test_minDepth() {
         Assert.assertEquals(
             2,
-            minDepth(createNode(listOf(3, 9, 20, null, null, 15, 7), 0))
+            minDepth(createTreeNode(listOf(3, 9, 20, null, null, 15, 7), 0))
         )
         Assert.assertEquals(
             5,
-            minDepth(createNode(listOf(2, null, 3, null, 4, null, 5, null, 6), 0))
+            minDepth(createTreeNode(listOf(2, null, 3, null, 4, null, 5, null, 6), 0))
         )
     }
 
     private fun minDepth(root: TreeNode?): Int {
         return 0
+    }
+
+    // https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/
+    // 中等
+    // status: record
+    fun test_connect() {
+        Assert.assertEquals(
+            createNode(listOf(1, 2, 3, 4, 5, 6, 7), 0, true),
+            connect(createNode(listOf(1, 2, 3, 4, 5, 6, 7), 0, false))
+        )
+    }
+
+    private fun connect(root: Node?): Node? {
+        return null
+    }
+
+    private fun createNode(list: List<Int>, index: Int, connect: Boolean = false): Node? {
+        val value = list.getOrNull(index) ?: return null
+        val node = Node(value)
+        node.left = createNode(list, index * 2 + 1)
+        node.right = createNode(list, index * 2 + 2)
+        val nodes = list.map {
+            Node(it)
+        }
+        nodes.forEachIndexed { position, item ->
+            if ((position and (position - 1)) != 0) {
+                item.next = nodes.getOrNull(position + 1)
+            }
+        }
+        return node
+    }
+
+    class Node(var `val`: Int) {
+        var left: Node? = null
+        var right: Node? = null
+        var next: Node? = null
+
+        override fun hashCode(): Int {
+            return Objects.hash(`val`, left, right, next)
+        }
+
+        override fun equals(other: Any?): Boolean {
+            return super.equals(other) || (other is Node && `val` == other.`val` && left == other.left && right == other.right && next == other.next)
+        }
     }
 }
