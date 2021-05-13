@@ -669,7 +669,7 @@ class LeeCodeTests {
 
     // https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
     // 中等
-    // status: record
+    // status: unit test
     @Test
     fun test_zigzagLevelOrder() {
         Assert.assertEquals(
@@ -683,7 +683,43 @@ class LeeCodeTests {
     }
 
     private fun zigzagLevelOrder(root: TreeNode?): List<List<Int>> {
-        return listOf()
+        val ret = mutableListOf<List<Int>>()
+        val queue = LinkedList<TreeNode>()
+        var forward = true
+        queue.addLast(root ?: return listOf())
+        while (true) {
+            ret.add(queue.map { it.value })
+            val size = queue.size
+            var n = 0
+            while (true) {
+                if (n >= size) {
+                    break
+                }
+                if (forward) {
+                    val last = queue.pollLast()
+                    last?.right?.let {
+                        queue.addLast(it)
+                    }
+                    last?.left?.let {
+                        queue.addLast(it)
+                    }
+                } else {
+                    val first = queue.pollFirst()
+                    first?.left?.let {
+                        queue.addLast(it)
+                    }
+                    first?.right?.let {
+                        queue.addLast(it)
+                    }
+                }
+                n++
+            }
+            forward = !forward
+            if (queue.isEmpty()) {
+                break
+            }
+        }
+        return ret
     }
 
     // https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/
