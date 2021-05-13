@@ -702,7 +702,28 @@ class LeeCodeTests {
     }
 
     private fun levelOrderBottom(root: TreeNode?): List<List<Int>> {
-        return listOf()
+        val ret = mutableListOf<List<Int>>()
+        val queue = LinkedList<TreeNode>()
+        queue.addLast(root ?: return listOf())
+        while (true) {
+            ret.add(0, queue.map { it.value })
+
+            val size = queue.size
+            var n = 0
+            while (true) {
+                if (n >= size) {
+                    break
+                }
+                val first = queue.pollFirst()
+                first.left?.let { queue.addLast(it) }
+                first.right?.let { queue.addLast(it) }
+                n++
+            }
+            if (queue.isEmpty()) {
+                break
+            }
+        }
+        return ret
     }
 
     // https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
