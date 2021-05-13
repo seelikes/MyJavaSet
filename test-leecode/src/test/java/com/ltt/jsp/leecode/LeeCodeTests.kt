@@ -680,6 +680,14 @@ class LeeCodeTests {
             ),
             zigzagLevelOrder(createTreeNode(listOf(3, 9, 20, null, null, 15, 7), 0))
         )
+        Assert.assertEquals(
+            listOf(
+                listOf(1),
+                listOf(3, 2),
+                listOf(4, 5)
+            ),
+            zigzagLevelOrder(createTreeNode(listOf(1, 2, 3, 4, null, null, 5), 0))
+        )
     }
 
     private fun zigzagLevelOrder(root: TreeNode?): List<List<Int>> {
