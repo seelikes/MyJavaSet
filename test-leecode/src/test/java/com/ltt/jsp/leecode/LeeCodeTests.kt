@@ -865,4 +865,39 @@ class LeeCodeTests {
             return super.equals(other) || (other is Node && `val` == other.`val` && left == other.left && right == other.right && next == other.next)
         }
     }
+
+    // 被围绕的区域
+    // https://leetcode-cn.com/problems/surrounded-regions/
+    // 中等
+    // status: record
+    @Test
+    fun test_solve() {
+        Assert.assertEquals(
+            arrayOf(
+                charArrayOf('X', 'X', 'X', 'X'),
+                charArrayOf('X', 'O', 'O', 'X'),
+                charArrayOf('X', 'X', 'O', 'X'),
+                charArrayOf('X', 'O', 'X', 'X')
+            ),
+            solve(arrayOf(
+                charArrayOf('X', 'X', 'X', 'X'),
+                charArrayOf('X', 'X', 'X', 'X'),
+                charArrayOf('X', 'X', 'X', 'X'),
+                charArrayOf('X', 'O', 'X', 'X')
+            ))
+        )
+
+        Assert.assertEquals(
+            arrayOf(
+                charArrayOf('X'),
+            ),
+            solve(arrayOf(
+                charArrayOf('X'),
+            ))
+        )
+    }
+
+    private fun solve(board: Array<CharArray>): Unit {
+
+    }
 }
