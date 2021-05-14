@@ -900,4 +900,35 @@ class LeeCodeTests {
     private fun solve(board: Array<CharArray>): Unit {
 
     }
+
+    // 岛屿数量
+    // https://leetcode-cn.com/problems/number-of-islands/
+    // 中等
+    // status: record
+    @Test
+    fun test_numIslands() {
+        Assert.assertEquals(
+            1,
+            numIslands(arrayOf(
+                charArrayOf('1', '1', '1', '1', '0'),
+                charArrayOf('1', '1', '0', '1', '0'),
+                charArrayOf('1', '1', '0', '0', '0'),
+                charArrayOf('0', '0', '0', '0', '0')
+            ))
+        )
+
+        Assert.assertEquals(
+            3,
+            numIslands(arrayOf(
+                charArrayOf('1', '1', '0', '0', '0'),
+                charArrayOf('1', '1', '0', '0', '0'),
+                charArrayOf('0', '0', '1', '0', '0'),
+                charArrayOf('0', '0', '0', '1', '1')
+            ))
+        )
+    }
+
+    private fun numIslands(grid: Array<CharArray>): Int {
+        return 0
+    }
 }
