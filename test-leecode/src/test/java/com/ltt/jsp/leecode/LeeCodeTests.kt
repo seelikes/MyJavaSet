@@ -960,4 +960,46 @@ class LeeCodeTests {
     private fun canFinish(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
         return false
     }
+
+    // 最小高度树
+    // https://leetcode-cn.com/problems/minimum-height-trees/
+    // 中等
+    // status: record
+    @Test
+    fun test_findMinHeightTrees() {
+        Assert.assertEquals(
+            listOf(1),
+            findMinHeightTrees(4, arrayOf(
+                intArrayOf(1, 0),
+                intArrayOf(1, 2),
+                intArrayOf(1, 3)
+            ))
+        )
+        Assert.assertEquals(
+            listOf(3, 4),
+            findMinHeightTrees(6, arrayOf(
+                intArrayOf(3, 0),
+                intArrayOf(3, 1),
+                intArrayOf(3, 2),
+                intArrayOf(3, 4),
+                intArrayOf(5, 4)
+            ))
+        )
+        Assert.assertEquals(
+            listOf(0),
+            findMinHeightTrees(1, arrayOf(
+                intArrayOf()
+            ))
+        )
+        Assert.assertEquals(
+            listOf(0, 1),
+            findMinHeightTrees(2, arrayOf(
+                intArrayOf(0, 1)
+            ))
+        )
+    }
+
+    private fun findMinHeightTrees(n: Int, edges: Array<IntArray>): List<Int> {
+        return listOf()
+    }
 }
