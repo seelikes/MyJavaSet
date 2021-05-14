@@ -931,4 +931,33 @@ class LeeCodeTests {
     private fun numIslands(grid: Array<CharArray>): Int {
         return 0
     }
+
+    // 课程表
+    // https://leetcode-cn.com/problems/course-schedule/
+    // 中等
+    // status: record
+    @Test
+    fun test_canFinish() {
+        Assert.assertTrue(
+            canFinish(
+                2,
+                arrayOf(
+                    intArrayOf(1, 0)
+                )
+            )
+        )
+        Assert.assertFalse(
+            canFinish(
+                2,
+                arrayOf(
+                    intArrayOf(1, 0),
+                    intArrayOf(0, 1)
+                )
+            )
+        )
+    }
+
+    private fun canFinish(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
+        return false
+    }
 }
