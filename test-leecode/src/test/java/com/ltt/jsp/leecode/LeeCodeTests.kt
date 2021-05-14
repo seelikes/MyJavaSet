@@ -779,9 +779,10 @@ class LeeCodeTests {
         return ret
     }
 
+    // 二叉树的最小深度
     // https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/
     // 简单
-    // status: record
+    // status: pass
     @Test
     fun test_minDepth() {
         Assert.assertEquals(
@@ -795,7 +796,30 @@ class LeeCodeTests {
     }
 
     private fun minDepth(root: TreeNode?): Int {
-        return 0
+        var ret = 0
+        val queue = LinkedList<TreeNode>()
+        queue.addLast(root ?: return 0)
+        while (true) {
+            ret++
+            val size = queue.size
+            var n = 0
+            while (true) {
+                if (n >= size) {
+                    break
+                }
+                val first = queue.pollFirst()
+                if (first.left == null && first.right == null) {
+                    return ret
+                }
+                first.left?.let { queue.addLast(it) }
+                first.right?.let { queue.addLast(it)}
+                n++
+            }
+            if (queue.isEmpty()) {
+                break
+            }
+        }
+        return ret
     }
 
     // https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/
