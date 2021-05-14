@@ -667,6 +667,7 @@ class LeeCodeTests {
         return ret
     }
 
+    // 二叉树的锯齿形层序遍历
     // https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/
     // 中等
     // status: unit test
@@ -696,7 +697,7 @@ class LeeCodeTests {
         var forward = true
         queue.addLast(root ?: return listOf())
         while (true) {
-            ret.add(queue.map { it.value })
+            val list = mutableListOf<Int>()
             val size = queue.size
             var n = 0
             while (true) {
@@ -704,24 +705,31 @@ class LeeCodeTests {
                     break
                 }
                 if (forward) {
-                    val last = queue.pollLast()
-                    last?.right?.let {
-                        queue.addLast(it)
+                    val last = queue.pollFirst()
+                    last?.let {
+                        list.add(it.value)
                     }
                     last?.left?.let {
                         queue.addLast(it)
                     }
-                } else {
-                    val first = queue.pollFirst()
-                    first?.left?.let {
+                    last?.right?.let {
                         queue.addLast(it)
                     }
+                } else {
+                    val first = queue.pollLast()
+                    first?.let {
+                        list.add(it.value)
+                    }
                     first?.right?.let {
-                        queue.addLast(it)
+                        queue.addFirst(it)
+                    }
+                    first?.left?.let {
+                        queue.addFirst(it)
                     }
                 }
                 n++
             }
+            ret.add(list)
             forward = !forward
             if (queue.isEmpty()) {
                 break
