@@ -822,9 +822,11 @@ class LeeCodeTests {
         return ret
     }
 
+    // 填充每个节点的下一个右侧节点指针
     // https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/
     // 中等
-    // status: record
+    // status: pass
+    @Test
     fun test_connect() {
         Assert.assertEquals(
             createNode(listOf(1, 2, 3, 4, 5, 6, 7), 0, true),
@@ -833,7 +835,33 @@ class LeeCodeTests {
     }
 
     private fun connect(root: Node?): Node? {
-        return null
+        val queue = LinkedList<Node>()
+        queue.addFirst(root ?: return null)
+        while (true) {
+            val size = queue.size
+            var n = 0
+            while (true) {
+                if (n >= size) {
+                    break
+                }
+                val node = queue.pollLast()
+                node.right?.let {
+                    if (n != 0) {
+                        it.next = queue.peekFirst()
+                    }
+                    queue.addFirst(it)
+                }
+                node.left?.let {
+                    it.next = queue.peekFirst()
+                    queue.addFirst(it)
+                }
+                n++
+            }
+            if (queue.isEmpty()) {
+                break
+            }
+        }
+        return root
     }
 
     private fun createNode(list: List<Int>, index: Int, connect: Boolean = false): Node? {
