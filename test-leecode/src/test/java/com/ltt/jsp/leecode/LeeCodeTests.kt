@@ -869,13 +869,8 @@ class LeeCodeTests {
         val node = Node(value)
         node.left = createNode(list, index * 2 + 1)
         node.right = createNode(list, index * 2 + 2)
-        val nodes = list.map {
-            Node(it)
-        }
-        nodes.forEachIndexed { position, item ->
-            if ((position and (position - 1)) != 0) {
-                item.next = nodes.getOrNull(position + 1)
-            }
+        if (connect) {
+            connect(node)
         }
         return node
     }
