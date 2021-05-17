@@ -217,12 +217,35 @@ class LeeCodeTests {
         var right: TreeNode? = null
     }
 
-    private fun createTreeNode(list: List<Int?>, index: Int): TreeNode? {
+    private fun createTreeNode(list: List<Int?>, index: Int, queue: LinkedList<TreeNode> = LinkedList()): TreeNode? {
         val value = list.getOrNull(index) ?: return null
-        val node = TreeNode(value)
-        node.left = createTreeNode(list, index * 2 + 1)
-        node.right = createTreeNode(list, index * 2 + 2)
-        return node
+        if (queue.isEmpty()) {
+            queue.addLast(TreeNode(value))
+        }
+        val first = queue.peekFirst()
+        val size = queue.size
+        var n = 0
+        while (true) {
+            if (n >= size) {
+                break
+            }
+            val node = queue.pollFirst()
+            node.left = list.getOrNull(index + 2 * n + 1)?.run {
+                TreeNode(this).also {
+                    queue.addLast(it)
+                }
+            }
+            node.right = list.getOrNull(index + 2 * n + 2)?.run {
+                TreeNode(this).also {
+                    queue.addLast(it)
+                }
+            }
+            n++
+        }
+        if (queue.isNotEmpty()) {
+            createTreeNode(list, index + size * 2, queue)
+        }
+        return first
     }
 
     private fun isSymmetric(root: TreeNode?): Boolean {
@@ -898,14 +921,14 @@ class LeeCodeTests {
         Assert.assertEquals(
             arrayOf(
                 charArrayOf('X', 'X', 'X', 'X'),
-                charArrayOf('X', 'O', 'O', 'X'),
-                charArrayOf('X', 'X', 'O', 'X'),
+                charArrayOf('X', 'X', 'X', 'X'),
+                charArrayOf('X', 'X', 'X', 'X'),
                 charArrayOf('X', 'O', 'X', 'X')
             ),
             solve(arrayOf(
                 charArrayOf('X', 'X', 'X', 'X'),
-                charArrayOf('X', 'X', 'X', 'X'),
-                charArrayOf('X', 'X', 'X', 'X'),
+                charArrayOf('X', 'O', 'O', 'X'),
+                charArrayOf('X', 'X', 'O', 'X'),
                 charArrayOf('X', 'O', 'X', 'X')
             ))
         )
