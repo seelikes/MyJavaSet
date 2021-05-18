@@ -944,6 +944,14 @@ class LeeCodeTests {
     }
 
     private fun solve(board: Array<CharArray>): Unit {
+        val candidates = mutableListOf<Pair<Int, Int>>()
+        board.forEachIndexed { m, _ ->
+            board.forEachIndexed { n, _ ->
+                if (board[m][n] == 'O') {
+                    candidates.add(m to n)
+                }
+            }
+        }
 
     }
 
@@ -1047,5 +1055,24 @@ class LeeCodeTests {
 
     private fun findMinHeightTrees(n: Int, edges: Array<IntArray>): List<Int> {
         return listOf()
+    }
+
+    // 面试题 17.07. 婴儿名字
+    // https://leetcode-cn.com/problems/baby-names-lcci/
+    // 中等
+    // status: record
+    @Test
+    fun test_trulyMostPopular() {
+        Assert.assertArrayEquals(
+            arrayOf("John(27)", "Chris(36)"),
+            trulyMostPopular(
+                arrayOf("John(15)", "Jon(12)", "Chris(13)", "Kris(4)", "Christopher(19)"),
+                arrayOf("(Jon,John)", "(John,Johnny)", "(Chris,Kris)", "(Chris,Christopher)")
+            )
+        )
+    }
+
+    private fun trulyMostPopular(names: Array<String>, synonyms: Array<String>): Array<String> {
+        return arrayOf()
     }
 }
