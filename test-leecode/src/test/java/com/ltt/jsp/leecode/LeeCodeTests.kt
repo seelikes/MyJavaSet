@@ -632,4 +632,53 @@ class LeeCodeTests {
     private fun levelOrder(root: TreeNode?): List<List<Int>> {
         return listOf()
     }
+
+    @Test
+    fun test_isSameTree() {
+        Assert.assertFalse(isSameTree(
+            createNode(listOf(), 0),
+            createNode(listOf(1), 0)
+        ))
+        Assert.assertFalse(isSameTree(
+            createNode(listOf(), 0),
+            createNode(listOf(), 0)
+        ))
+    }
+
+    // https://leetcode-cn.com/problems/same-tree/
+    private fun isSameTree(p: TreeNode?, q: TreeNode?): Boolean {
+        val pq = LinkedList<TreeNode>()
+        pq.push(p)
+        val qq = LinkedList<TreeNode>()
+        qq.push(q)
+        while (pq.isNotEmpty() && qq.isNotEmpty()) {
+            val np = pq.poll()
+            val nq = qq.poll()
+            if ((np == null) != (nq == null)) {
+                return false
+            }
+            if ((np == null)) {
+                return true
+            }
+
+            if (np.value != nq.value) {
+                return false
+            }
+            if ((np.left == null) != (nq.left == null)) {
+                return false
+            }
+            if (np.left != null) {
+                pq.push(np.left)
+                qq.push(nq.left)
+            }
+            if ((np.right == null) != (nq.right == null)) {
+                return false
+            }
+            if (np.right != null) {
+                pq.push(np.right)
+                qq.push(nq.right)
+            }
+        }
+        return true
+    }
 }
