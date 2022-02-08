@@ -1098,4 +1098,29 @@ class LeeCodeTests {
     private fun removeStones(stones: Array<IntArray>): Int {
         return 0
     }
+
+    fun maxDepth(root: TreeNode?): Int {
+        if (root == null) {
+            return 0
+        }
+
+        var depth = 0
+        val queue = LinkedList<TreeNode>()
+        queue.addLast(root)
+        var layerCount: Int
+        while (queue.isNotEmpty()) {
+            layerCount = queue.size
+            for (n in 0 until layerCount) {
+                val node = queue.removeLast()
+                if (node.left != null) {
+                    queue.addLast(node.left)
+                }
+                if (node.right != null) {
+                    queue.addLast(node.right)
+                }
+            }
+            ++depth
+        }
+        return depth
+    }
 }
