@@ -1123,4 +1123,43 @@ class LeeCodeTests {
         }
         return depth
     }
+
+    private fun isValid(s: String): Boolean {
+        if (s.length % 2 != 0) {
+            return false
+        }
+        val stack = Stack<Char>()
+        for (n in s.indices) {
+            val char = s[n]
+            if (stack.empty()) {
+                stack.push(char)
+                continue
+            }
+            if (char == '(' || char == '{' || char == '[') {
+                stack.push(char)
+                continue
+            }
+            val endChar = stack.pop()
+            if (endChar == '(' && char == ')') {
+                continue
+            }
+            if (endChar == '{' && char == '}') {
+                continue
+            }
+            if (endChar == '[' && char == ']') {
+                continue
+            }
+            return false
+        }
+        return true
+    }
+
+    @Test
+    fun test_isValid() {
+        Assert.assertTrue(isValid("()"))
+        Assert.assertTrue(isValid("()[]{}"))
+        Assert.assertFalse(isValid("(]"))
+        Assert.assertFalse(isValid("([)]"))
+        Assert.assertTrue(isValid("{[]}"))
+    }
 }
